@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.9" type="template">
+	<name>j3template</name>
+	<creationDate>28/03/2020</creationDate>
+	<author>OmniWeb</author>
+	<authorEmail>omniwebgr@gmail.com</authorEmail>
+	<authorUrl>https://www.omniweb.gr</authorUrl>
+	<copyright></copyright>
+	<version>2020.03.28</version>
+	<description></description>
+	<files>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>css</folder>
+		<folder>html</folder>
+		<folder>js</folder>
+	</files>
+	<positions>
+		<position>header</position>
+        <position>above-main</position>
+		<position>above-content</position>
+		<position>sidebar</position>
+		<position>below-content</position>
+        <position>below-main</position>
+		<position>footer</position>
+		<position>off-canvas</position>
+	</positions>
+</extension>

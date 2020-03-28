@@ -1,0 +1,24 @@
+:root {
+    
+}
+.img {
+    max-width: 100%;
+}
+.img-4x3 {
+    object-fit: cover;
+}
+.img-16x9 {
+    object-fit: cover;
+}
+@media (min-width: 576px) {
+    
+}
+@media (min-width: 768px) {
+
+}
+@media (min-width: 992px) {
+
+}
+@media (min-width: 1200px) {
+
+}
