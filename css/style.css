@@ -13,6 +13,16 @@
 .dropdown-toggle[aria-expanded="true"]::after {
     transform: rotateX(180deg);
 }
+.breadcrumb {
+    background-color: transparent;
+}
+.breadcrumb-item::before {
+    display: none !important;
+}
+.off-canvas {
+    width: 300px;
+    left: -300px;
+}
 @media (min-width: 576px) {
     
 }
