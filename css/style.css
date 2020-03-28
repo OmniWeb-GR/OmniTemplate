@@ -10,6 +10,9 @@
 .img-16x9 {
     object-fit: cover;
 }
+.dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotateX(180deg);
+}
 @media (min-width: 576px) {
     
 }
