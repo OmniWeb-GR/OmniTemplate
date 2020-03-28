@@ -4,8 +4,8 @@
 	//***************************************
 	$app = JFactory::getApplication();
   	$menu = $app->getMenu()->getActive();
-  	$pageclass = '';
-  	if (is_object($menu)) $pageclass = $menu->params->get('pageclass_sfx');
+  	$pageclass = "";
+  	if (is_object($menu)) $pageclass = $menu->params->get("pageclass_sfx");
 	//***************************************
 	$input = JFactory::getApplication()->input;
 	$view = $input->get('view');
