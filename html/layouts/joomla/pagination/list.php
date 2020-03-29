@@ -11,7 +11,7 @@ defined('JPATH_BASE') or die;
 
 $list = $displayData['list'];
 ?>
-<aside class="px-1">
+<aside>
 	<nav>
 		<ul class="pagination justify-content-center">
 			<li class="page-item pagination-start"><?php echo $list['start']['data']; ?></li>
