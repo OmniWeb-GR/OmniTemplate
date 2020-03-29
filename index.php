@@ -50,13 +50,21 @@
 						<jdoc:include type="modules" name="left-sidebar" style="xhtml"/>
 					</aside>
 					<div class="col">
-						<jdoc:include type="component"/>
+						<?php if ($this->countModules('content')): ?>
+							<jdoc:include type="modules" name="content" style="xhtml"/>
+						<?php else: ?>
+							<jdoc:include type="component"/>
+						<?php endif; ?>
 					</div>
 				</div>
 			<?php elseif ($this->countModules('right-sidebar')): ?>
 				<div class="row">
 					<div class="col">
-						<jdoc:include type="component"/>
+						<?php if ($this->countModules('content')): ?>
+							<jdoc:include type="modules" name="content" style="xhtml"/>
+						<?php else: ?>
+							<jdoc:include type="component"/>
+						<?php endif; ?>
 					</div>
 					<aside class="col-auto">
 						<jdoc:include type="modules" name="right-sidebar" style="xhtml"/>
@@ -68,14 +76,22 @@
 						<jdoc:include type="modules" name="left-sidebar" style="xhtml"/>
 					</aside>
 					<div class="col">
-						<jdoc:include type="component"/>
+						<?php if ($this->countModules('content')): ?>
+							<jdoc:include type="modules" name="content" style="xhtml"/>
+						<?php else: ?>
+							<jdoc:include type="component"/>
+						<?php endif; ?>
 					</div>
 					<aside class="col-auto">
 						<jdoc:include type="modules" name="right-sidebar" style="xhtml"/>
 					</aside>
 				</div>
             <?php else: ?>
-                <jdoc:include type="component"/>
+                <?php if ($this->countModules('content')): ?>
+					<jdoc:include type="modules" name="content" style="xhtml"/>
+				<?php else: ?>
+					<jdoc:include type="component"/>
+				<?php endif; ?>
             <?php endif; ?>
             <jdoc:include type="modules" name="below-content" style="xhtml"/>
         </main>

@@ -20,6 +20,7 @@
         <position>above-main</position>
 		<position>above-content</position>
 		<position>left-sidebar</position>
+		<position>content</position>
 		<position>right-sidebar</position>
 		<position>below-content</position>
         <position>below-main</position>
