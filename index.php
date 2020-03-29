@@ -10,7 +10,7 @@
 	$input = JFactory::getApplication()->input;
 	$view = $input->get('view');
 	//***************************************
-	$lang = explode("-", $this->language); 
+	$lang = explode("-", $this->language);
 	//***************************************
 	$class = $pageclass ? htmlspecialchars($pageclass): "default";
 	$class .= " " . $view;

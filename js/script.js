@@ -57,7 +57,7 @@ function img16x9() {
 }
 
 function stylePagination() {
-	jQuery('.pagination nav').unwrap();
+	jQuery('.pagination aside').unwrap();
 	jQuery('.pagenav').addClass('page-link');
 	jQuery('span.pagenav').parent().addClass('disabled');
 }
