@@ -15,9 +15,11 @@
 	$class = $pageclass ? htmlspecialchars($pageclass): "default";
 	$class .= " " . $view;
 	//***************************************
+	unset($this->_scripts['/media/jui/js/jquery.js']);
 	unset($this->_scripts['/media/jui/js/jquery.min.js']);
 	unset($this->_scripts['/media/jui/js/jquery-noconflict.js']);
 	unset($this->_scripts['/media/jui/js/jquery-migrate.min.js']);
+	unset($this->_scripts['/media/jui/js/bootstrap.js']);
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $lang[0]; ?>" dir="<?php echo $this->direction; ?>">
@@ -40,14 +42,37 @@
 			<jdoc:include type="modules" name="header" style="xhtml"/>
 		</header>
         <jdoc:include type="modules" name="above-main" style="xhtml"/>
-        <main>
+        <main class="container-fluid">
             <jdoc:include type="modules" name="above-content" style="xhtml"/>
-            <?php if ($this->countModules('sidebar')): ?>
-                <aside>
-					<jdoc:include type="modules" name="sidebar" style="xhtml"/>
-				</aside>
-                <div>
-					<jdoc:include type="component"/>
+            <?php if ($this->countModules('left-sidebar')): ?>
+				<div class="row">
+					<aside class="col-auto">
+						<jdoc:include type="modules" name="left-sidebar" style="xhtml"/>
+					</aside>
+					<div class="col">
+						<jdoc:include type="component"/>
+					</div>
+				</div>
+			<?php elseif ($this->countModules('right-sidebar')): ?>
+				<div class="row">
+					<div class="col">
+						<jdoc:include type="component"/>
+					</div>
+					<aside class="col-auto">
+						<jdoc:include type="modules" name="right-sidebar" style="xhtml"/>
+					</aside>
+				</div>
+			<?php elseif (($this->countModules('left-sidebar')) && ($this->countModules('right-sidebar'))): ?>
+				<div class="row">
+					<aside class="col-auto">
+						<jdoc:include type="modules" name="left-sidebar" style="xhtml"/>
+					</aside>
+					<div class="col">
+						<jdoc:include type="component"/>
+					</div>
+					<aside class="col-auto">
+						<jdoc:include type="modules" name="right-sidebar" style="xhtml"/>
+					</aside>
 				</div>
             <?php else: ?>
                 <jdoc:include type="component"/>

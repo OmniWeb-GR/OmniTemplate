@@ -19,7 +19,8 @@
 		<position>header</position>
         <position>above-main</position>
 		<position>above-content</position>
-		<position>sidebar</position>
+		<position>left-sidebar</position>
+		<position>right-sidebar</position>
 		<position>below-content</position>
         <position>below-main</position>
 		<position>footer</position>
