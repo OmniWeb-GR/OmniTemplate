@@ -36,11 +36,20 @@ defined('_JEXEC') or die;
 		// Make a link if not the last item in the breadcrumbs
 		$show_last = $params->get('showLast', 1);
 
+		if ($params->get('separator') == '') {
+			$custom_separator = false;
+			$list_item_class = 'breadcrumb-item';
+		}
+		else {
+			$custom_separator = true;
+			$list_item_class = 'breadcrumb-item breadcrumb-item--no-separator';
+		}
+
 		// Generate the trail
 		foreach ($list as $key => $item) :
 			if ($key !== $last_item_key) :
 				// Render all but last item - along with separator ?>
-				<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item">
+				<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="<?php echo $list_item_class; ?>">
 					<?php if (!empty($item->link)) : ?>
 						<a itemprop="item" href="<?php echo $item->link; ?>" class="pathway"><span itemprop="name"><?php echo $item->name; ?></span></a>
 					<?php else : ?>
@@ -49,16 +58,18 @@ defined('_JEXEC') or die;
 						</span>
 					<?php endif; ?>
 
-					<?php if (($key !== $penult_item_key) || $show_last) : ?>
-						<span class="divider">
-							<?php echo $separator; ?>
-						</span>
+					<?php if ($custom_separator): ?>
+						<?php if (($key !== $penult_item_key) || $show_last) : ?>
+							<span class="divider">
+								<?php echo $separator; ?>
+							</span>
+						<?php endif; ?>
 					<?php endif; ?>
 					<meta itemprop="position" content="<?php echo $key + 1; ?>">
 				</li>
 			<?php elseif ($show_last) :
 				// Render last item if reqd. ?>
-				<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item active">
+				<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="<?php echo $list_item_class; ?> active">
 					<span itemprop="name">
 						<?php echo $item->name; ?>
 					</span>
