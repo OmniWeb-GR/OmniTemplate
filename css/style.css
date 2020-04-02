@@ -19,6 +19,9 @@ ul, ol {
 .breadcrumb {
     background-color: transparent;
 }
+.breadcrumb-item--no-separator {
+    padding-left: .2rem !important;
+}
 .breadcrumb-item--no-separator::before {
     display: none !important;
 }

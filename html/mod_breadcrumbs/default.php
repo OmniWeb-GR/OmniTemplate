@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 ?>
 <nav aria-label="breadcrumb" role="navigation">
-	<ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+	<ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb mb-0">
 		<?php if ($params->get('showHere', 1)) : ?>
 			<li>
 				<?php echo JText::_('MOD_BREADCRUMBS_HERE'); ?>&#160;
