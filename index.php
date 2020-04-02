@@ -1,5 +1,6 @@
 <?php defined('_JEXEC') or die; ?>
 <?php
+	$amp = true;
 	$cache = 0;
 	//***************************************
 	$app = JFactory::getApplication();
@@ -14,6 +15,12 @@
 	//***************************************
 	$class = $pageclass ? htmlspecialchars($pageclass): "default";
 	$class .= " " . $view;
+	//***************************************
+	use Joomla\CMS\Uri\Uri;
+	if (($amp == true) && ($view == 'article')) {
+		$uri = Uri::getInstance();
+		$url = $uri->toString() . '?template=j3amptemplate';
+	}
 	//***************************************
 	unset($this->_scripts['/media/jui/js/jquery.js']);
 	unset($this->_scripts['/media/jui/js/jquery.min.js']);
@@ -31,6 +38,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andreaskournoutas/utilities.css@2020.03.07/utilities.min.css">
         <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/style.css?v=<?php echo $cache; ?>"/>
         <!-- Google font link -->
+		<?php if (($amp == true) && ($view == 'article')): ?>
+			<link rel="amphtml" href="<?php echo $url ?>">
+		<?php endif; ?>
     </head>
     <body class="<?php echo $class ?>">
     <div class="visible-xl d-none d-xl-block"></div>
