@@ -112,7 +112,7 @@
 		<?php if ($this->countModules('off-canvas')): ?>
 			<aside id="off-canvas" class="off-canvas fixed-top h-100vh shadow">
 				<jdoc:include type="modules" name="off-canvas" style="xhtml"/>
-				<button type="button" class="btn position-absolute r-0 t-0 px-05 pb-05 pt-0" aria-label="<?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>">
+				<button id="off-canvas__close-button" type="button" class="btn position-absolute r-0 t-0 px-05 pb-05 pt-0" aria-label="<?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>">
 					<span class="off-canvas__close-icon d-inline-block fs-25" aria-hidden="true">&times;</span>
 				</button>
 			</aside>

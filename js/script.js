@@ -19,6 +19,10 @@ jQuery(window).scroll(function() {
 
 });
 
+jQuery('#off-canvas__close-button').click(function() {
+	jQuery('#off-canvas').removeClass('off-canvas--open');
+});
+
 function tierAndOrientation() {
   	if (jQuery('.visible-xl').css('display') == 'block') {
 		deviceTier = 'xl';
