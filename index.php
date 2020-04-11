@@ -17,7 +17,7 @@
 	$class .= " " . $view;
 	//***************************************
 	use Joomla\CMS\Uri\Uri;
-	if (($amp == true) && ($view == 'article')) {
+	if (($amp) && ($view == 'article')) {
 		$uri = Uri::getInstance();
 		$url = $uri->toString() . '?template=j3amptemplate';
 	}
@@ -38,12 +38,12 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andreaskournoutas/utilities.css@2020.03.07/utilities.min.css">
         <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/style.css?v=<?php echo $cache; ?>"/>
         <!-- Google font link -->
-		<?php if (($amp == true) && ($view == 'article')): ?>
+		<?php if (($amp) && ($view == 'article')): ?>
 			<link rel="amphtml" href="<?php echo $url ?>">
 		<?php endif; ?>
     </head>
     <body class="<?php echo $class ?>">
-    <div class="visible-xl d-none d-xl-block"></div>
+    	<div class="visible-xl d-none d-xl-block"></div>
 		<div class="visible-lg d-none d-lg-block d-xl-none"></div>
 		<div class="visible-md d-none d-md-block d-lg-none"></div>
 		<div class="visible-sm d-none d-sm-block d-md-none"></div>
@@ -109,9 +109,14 @@
         <footer class="footer">
 			<jdoc:include type="modules" name="footer" style="xhtml"/>
 		</footer>
-		<div id="off-canvas" class="off-canvas fixed-top h-100vh">
-			<jdoc:include type="modules" name="off-canvas" style="xhtml"/>
-		</div>
+		<?php if ($this->countModules('off-canvas')): ?>
+			<aside id="off-canvas" class="off-canvas fixed-top h-100vh shadow">
+				<jdoc:include type="modules" name="off-canvas" style="xhtml"/>
+				<button type="button" class="btn position-absolute r-0 t-0 px-05 pb-05 pt-0" aria-label="<?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>">
+					<span class="off-canvas__close-icon d-inline-block fs-25" aria-hidden="true">&times;</span>
+				</button>
+			</aside>
+		<?php endif; ?>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/script.js?v=<?php echo $cache; ?>"></script>

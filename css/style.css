@@ -1,5 +1,6 @@
 :root {
-
+    --off-canvas-width: 320px;
+    --transition: all .3s;
 }
 ul, ol {
     margin-bottom: 0;
@@ -26,9 +27,18 @@ ul, ol {
     display: none !important;
 }
 .off-canvas {
-    /* temporary CSS */
-    width: 300px;
-    left: -300px;
+    width: var(--off-canvas-width);
+    left: calc((var(--off-canvas-width) + .5rem) * (-1));
+    transition: var(--transition);
+}
+.off-canvas--open {
+    left: 0;
+    transition: var(--transition);
+}
+.off-canvas__close-icon {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
 }
 @media (min-width: 576px) {
     
