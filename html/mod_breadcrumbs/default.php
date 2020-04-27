@@ -51,7 +51,7 @@ defined('_JEXEC') or die;
 				// Render all but last item - along with separator ?>
 				<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="<?php echo $list_item_class; ?>">
 					<?php if (!empty($item->link)) : ?>
-						<a itemprop="item" href="<?php echo $item->link; ?>" class="pathway"><span itemprop="name"><?php echo $item->name; ?></span></a>
+						<a itemprop="item" href="<?php echo $item->link; ?>"><span itemprop="name"><?php echo $item->name; ?></span></a>
 					<?php else : ?>
 						<span itemprop="name">
 							<?php echo $item->name; ?>
@@ -60,7 +60,7 @@ defined('_JEXEC') or die;
 
 					<?php if ($custom_separator): ?>
 						<?php if (($key !== $penult_item_key) || $show_last) : ?>
-							<span class="divider">
+							<span class="breadcrumb__divider">
 								<?php echo $separator; ?>
 							</span>
 						<?php endif; ?>
