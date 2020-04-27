@@ -59,7 +59,7 @@ $format = '<input class="custom-control-input" type="checkbox" id="%1$s" name="%
 $alt = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $name);
 ?>
 
-<fieldset id="<?php echo $id; ?>" class="<?php echo trim($class . ' form-check'); ?>"
+<fieldset id="<?php echo $id; ?>" class="<?php echo trim($class); ?>"
 	<?php echo $required ? 'required aria-required="true"' : ''; ?>
 	<?php echo $autofocus ? 'autofocus' : ''; ?>>
 
