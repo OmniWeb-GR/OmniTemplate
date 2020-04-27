@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  * jicon-text, jicon-none, jicon-icon
  */
 ?>
-<dl class="contact-address dl-horizontal" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+<dl class="contact__address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
 	<?php if (($this->params->get('address_check') > 0) &&
 		($this->contact->address || $this->contact->suburb  || $this->contact->state || $this->contact->country || $this->contact->postcode)) : ?>
 		<dt>
@@ -25,7 +25,7 @@ defined('_JEXEC') or die;
 
 		<?php if ($this->contact->address && $this->params->get('show_street_address')) : ?>
 			<dd>
-				<span class="contact-street" itemprop="streetAddress">
+				<span class="contact__street" itemprop="streetAddress">
 					<?php echo nl2br($this->contact->address); ?>
 					<br />
 				</span>
@@ -34,7 +34,7 @@ defined('_JEXEC') or die;
 
 		<?php if ($this->contact->suburb && $this->params->get('show_suburb')) : ?>
 			<dd>
-				<span class="contact-suburb" itemprop="addressLocality">
+				<span class="contact__suburb" itemprop="addressLocality">
 					<?php echo $this->contact->suburb; ?>
 					<br />
 				</span>
@@ -42,7 +42,7 @@ defined('_JEXEC') or die;
 		<?php endif; ?>
 		<?php if ($this->contact->state && $this->params->get('show_state')) : ?>
 			<dd>
-				<span class="contact-state" itemprop="addressRegion">
+				<span class="contact__state" itemprop="addressRegion">
 					<?php echo $this->contact->state; ?>
 					<br />
 				</span>
@@ -50,7 +50,7 @@ defined('_JEXEC') or die;
 		<?php endif; ?>
 		<?php if ($this->contact->postcode && $this->params->get('show_postcode')) : ?>
 			<dd>
-				<span class="contact-postcode" itemprop="postalCode">
+				<span class="contact__postcode" itemprop="postalCode">
 					<?php echo $this->contact->postcode; ?>
 					<br />
 				</span>
@@ -58,7 +58,7 @@ defined('_JEXEC') or die;
 		<?php endif; ?>
 		<?php if ($this->contact->country && $this->params->get('show_country')) : ?>
 		<dd>
-			<span class="contact-country" itemprop="addressCountry">
+			<span class="contact__country" itemprop="addressCountry">
 				<?php echo $this->contact->country; ?>
 				<br />
 			</span>
@@ -73,7 +73,7 @@ defined('_JEXEC') or die;
 		</span>
 	</dt>
 	<dd>
-		<span class="contact-emailto">
+		<span class="contact__emailto">
 			<?php echo $this->contact->email_to; ?>
 		</span>
 	</dd>
@@ -86,7 +86,7 @@ defined('_JEXEC') or die;
 		</span>
 	</dt>
 	<dd>
-		<span class="contact-telephone" itemprop="telephone">
+		<span class="contact__telephone" itemprop="telephone">
 			<?php echo $this->contact->telephone; ?>
 		</span>
 	</dd>
@@ -98,7 +98,7 @@ defined('_JEXEC') or die;
 		</span>
 	</dt>
 	<dd>
-		<span class="contact-fax" itemprop="faxNumber">
+		<span class="contact__fax" itemprop="faxNumber">
 		<?php echo $this->contact->fax; ?>
 		</span>
 	</dd>
@@ -110,7 +110,7 @@ defined('_JEXEC') or die;
 		</span>
 	</dt>
 	<dd>
-		<span class="contact-mobile" itemprop="telephone">
+		<span class="contact__mobile" itemprop="telephone">
 			<?php echo $this->contact->mobile; ?>
 		</span>
 	</dd>
@@ -121,10 +121,27 @@ defined('_JEXEC') or die;
 		</span>
 	</dt>
 	<dd>
-		<span class="contact-webpage">
+		<span class="contact__webpage">
 			<a href="<?php echo $this->contact->webpage; ?>" target="_blank" rel="noopener noreferrer" itemprop="url">
 			<?php echo JStringPunycode::urlToUTF8($this->contact->webpage); ?></a>
 		</span>
 	</dd>
 <?php endif; ?>
 </dl>
+
+
+
+
+
+<!-- <?php if (($this->params->get('address_check') > 0) && ($this->contact->address || $this->contact->suburb  || $this->contact->state || $this->contact->country || $this->contact->postcode)) : ?>
+	<address class="contact__address row d-inline-flex" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+		<div class="col-auto">
+			<?php echo $this->params->get('marker_address'); ?>
+		</div>
+		<div class="col">
+			<?php if ($this->contact->address && $this->params->get('show_street_address')) : ?>
+
+			<?php endif; ?>
+		</div>
+	</address>
+<?php endif; ?> -->
