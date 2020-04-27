@@ -51,10 +51,10 @@ JHtml::_('script', 'system/html5fallback.js', array('version' => 'auto', 'relati
  *     %3 - value
  *     %4 = any other attributes
  */
-$format = '<input type="radio" id="%1$s" name="%2$s" value="%3$s" %4$s />';
+$format = '<input class="custom-control-input" type="radio" id="%1$s" name="%2$s" value="%3$s" %4$s />';
 $alt    = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $name);
 ?>
-<fieldset id="<?php echo $id; ?>" class="<?php echo trim($class . ' radio' . ($readonly || $disabled ? ' disabled' : '') . ($readonly ? ' readonly' : '')); ?>"
+<fieldset id="<?php echo $id; ?>" class="<?php echo trim($class . ' form-check' . ($readonly || $disabled ? ' disabled' : '') . ($readonly ? ' readonly' : '')); ?>"
 	<?php echo $disabled ? 'disabled' : ''; ?>
 	<?php echo $readonly || $disabled ? 'style="pointer-events: none"' : '' ?>
 	<?php echo $required ? 'required aria-required="true"' : ''; ?>
@@ -62,30 +62,32 @@ $alt    = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $name);
 
 	<?php if (!empty($options)) : ?>
 		<?php foreach ($options as $i => $option) : ?>
-			<?php
-				// Initialize some option attributes.
-				$checked        = ((string) $option->value === $value) ? 'checked="checked"' : '';
-				$disabled       = !empty($option->disable) ? 'disabled' : '';
-				$style          = $disabled ? 'style="pointer-events: none"' : '';
-				$option->class  = !empty($option->class) ? $option->class : '';
-				$option->class  = trim($option->class . ' ' . $disabled);
-				$optionClass    = !empty($option->class) ? 'class="' . $option->class . '"' : '';
+			<div class="custom-control custom-radio">
+				<?php
+					// Initialize some option attributes.
+					$checked        = ((string) $option->value === $value) ? 'checked="checked"' : '';
+					$disabled       = !empty($option->disable) ? 'disabled' : '';
+					$style          = $disabled ? 'style="pointer-events: none"' : '';
+					$option->class  = !empty($option->class) ? $option->class : '';
+					$option->class  = trim($option->class . ' ' . $disabled);
+					$optionClass    = !empty($option->class) ? 'class="' . $option->class . '"' : '';
 
-				// Initialize some JavaScript option attributes.
-				$onclick    = !empty($option->onclick) ? 'onclick="' . $option->onclick . '"' : '';
-				$onchange   = !empty($option->onchange) ? 'onchange="' . $option->onchange . '"' : '';
-				$oid        = $id . $i;
-				$ovalue     = htmlspecialchars($option->value, ENT_COMPAT, 'UTF-8');
-				$attributes = array_filter(array($checked, $optionClass, $disabled, $style, $onchange, $onclick));
-			?>
+					// Initialize some JavaScript option attributes.
+					$onclick    = !empty($option->onclick) ? 'onclick="' . $option->onclick . '"' : '';
+					$onchange   = !empty($option->onchange) ? 'onchange="' . $option->onchange . '"' : '';
+					$oid        = $id . $i;
+					$ovalue     = htmlspecialchars($option->value, ENT_COMPAT, 'UTF-8');
+					$attributes = array_filter(array($checked, $optionClass, $disabled, $style, $onchange, $onclick));
+				?>
 
-			<?php if ($required) : ?>
-				<?php $attributes[] = 'required aria-required="true"'; ?>
-			<?php endif; ?>
-			<?php echo sprintf($format, $oid, $name, $ovalue, implode(' ', $attributes)); ?>
-			<label for="<?php echo $oid; ?>" <?php echo trim($optionClass . ' ' . $style); ?>>
-				<?php echo $option->text; ?>
-			</label>
+				<?php if ($required) : ?>
+					<?php $attributes[] = 'required aria-required="true"'; ?>
+				<?php endif; ?>
+				<?php echo sprintf($format, $oid, $name, $ovalue, implode(' ', $attributes)); ?>
+				<label for="<?php echo $oid; ?>" <?php echo trim($optionClass . ' ' . $style); ?> class="custom-control-label">
+					<?php echo $option->text; ?>
+				</label>
+			</div>
 		<?php endforeach; ?>
 	<?php endif; ?>
 </fieldset>

@@ -103,18 +103,16 @@ JHtml::_('script', $helperPath, false, true, false, false, true);
 JHtml::_('script', 'system/fields/calendar.min.js', false, true, false, false, true);
 JHtml::_('stylesheet', 'system/fields/calendar' . $cssFileExt, array(), true);
 ?>
-<div class="field-calendar">
-	<?php if (!$readonly && !$disabled) : ?>
-	<div class="input-append">
-		<?php endif; ?>
-		<input type="text" id="<?php echo $id; ?>" name="<?php
-		echo $name; ?>" value="<?php
-		echo htmlspecialchars(($value !== '0000-00-00 00:00:00') ? $value : '', ENT_COMPAT, 'UTF-8'); ?>" <?php echo $attributes; ?>
-		<?php echo !empty($hint) ? 'placeholder="' . htmlspecialchars($hint, ENT_COMPAT, 'UTF-8') . '"' : ''; ?> data-alt-value="<?php
-		echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" autocomplete="off"/>
-		<button type="button" class="<?php echo ($readonly || $disabled) ? 'hidden ' : ''; ?>btn btn-secondary"
+<div class="field-calendar input-group">
+	<input class="form-control" type="text" id="<?php echo $id; ?>" name="<?php
+	echo $name; ?>" value="<?php
+	echo htmlspecialchars(($value !== '0000-00-00 00:00:00') ? $value : '', ENT_COMPAT, 'UTF-8'); ?>" <?php echo $attributes; ?>
+	<?php echo !empty($hint) ? 'placeholder="' . htmlspecialchars($hint, ENT_COMPAT, 'UTF-8') . '"' : ''; ?> data-alt-value="<?php
+	echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" autocomplete="off"/>
+	<div class="input-group-append">
+		<button type="button" class="<?php echo ($readonly || $disabled) ? 'hidden ' : ''; ?>btn btn-primary d-flex rounded-right"
 			id="<?php echo  $id; ?>_btn"
-			data-inputfield="<?php echo $id; ?>"
+				data-inputfield="<?php echo $id; ?>"
 			data-dayformat="<?php echo $format; ?>"
 			data-button="<?php echo $id; ?>_btn"
 			data-firstday="<?php echo JFactory::getLanguage()->getFirstDay(); ?>"
@@ -127,9 +125,8 @@ JHtml::_('stylesheet', 'system/fields/calendar' . $cssFileExt, array(), true);
 			data-only-months-nav="<?php echo $singleheader; ?>"
 			<?php echo isset($minYear) && strlen($minYear) ? 'data-min-year="' . $minYear . '"' : ''; ?>
 			<?php echo isset($maxYear) && strlen($maxYear) ? 'data-max-year="' . $maxYear . '"' : ''; ?>
-			title="<?php echo JText::_('JLIB_HTML_BEHAVIOR_OPEN_CALENDAR'); ?>"
-		><span class="icon-calendar" aria-hidden="true"></span></button>
-		<?php if (!$readonly && !$disabled) : ?>
+			title="<?php echo JText::_('JLIB_HTML_BEHAVIOR_OPEN_CALENDAR'); ?>">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+		</button>
 	</div>
-<?php endif; ?>
 </div>
