@@ -32,21 +32,19 @@
 <html lang="<?php echo $lang[0]; ?>" dir="<?php echo $this->direction; ?>">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <jdoc:include type="head"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/andreaskournoutas/utilities.css@2020.03.07/utilities.min.css">
         <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/style.css?v=<?php echo $cache; ?>"/>
 		<?php if (($amp) && ($view == 'article')): ?>
 			<link rel="amphtml" href="<?php echo $url ?>">
 		<?php endif; ?>
     </head>
     <body class="<?php echo $class ?>">
-    	<div class="visible-xl d-none d-xl-block"></div>
-		<div class="visible-lg d-none d-lg-block d-xl-none"></div>
-		<div class="visible-md d-none d-md-block d-lg-none"></div>
-		<div class="visible-sm d-none d-sm-block d-md-none"></div>
-		<div class="visible-xs d-block d-sm-none"></div>
+		<div id="visible-xs" class="d-block d-sm-none"></div>
+		<div id="visible-sm" class="d-none d-sm-block d-md-none"></div>
+		<div id="visible-md" class="d-none d-md-block d-lg-none"></div>
+		<div id="visible-lg" class="d-none d-lg-block d-xl-none"></div>
+    	<div id="visible-xl" class="d-none d-xl-block"></div>
         <header class="header">
 			<jdoc:include type="modules" name="header" style="xhtml"/>
 		</header>
@@ -109,15 +107,17 @@
 			<jdoc:include type="modules" name="footer" style="xhtml"/>
 		</footer>
 		<?php if ($this->countModules('off-canvas')): ?>
-			<aside id="off-canvas" class="off-canvas fixed-top h-100vh shadow">
+			<aside id="off-canvas" class="off-canvas fixed-top bg-primary shadow">
 				<jdoc:include type="modules" name="off-canvas" style="xhtml"/>
-				<button id="off-canvas__close-button" type="button" class="btn position-absolute r-0 t-0 px-05 pb-05 pt-0" aria-label="<?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>">
-					<span class="off-canvas__close-icon d-inline-block fs-25" aria-hidden="true">&times;</span>
+				<button id="off-canvas-close-button" type="button" class="btn position-absolute" aria-label="<?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>">
+					<svg width="1em" height="1em" viewBox="0 0 16 16" class="off-canvas__close-icon bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+					</svg>
 				</button>
 			</aside>
 		<?php endif; ?>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/script.js?v=<?php echo $cache; ?>"></script>
     </body>
 </html>
