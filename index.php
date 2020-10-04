@@ -106,11 +106,17 @@
         <footer class="footer">
 			<jdoc:include type="modules" name="footer" style="xhtml"/>
 		</footer>
+		<div id="dark-layer" class="dark-layer fixed-top w-100 h-100 invisible"></div>
+		<div id="loader" class="dark-layer fixed-top w-100 h-100 invisible d-flex justify-content-center align-items-center">
+			<div class="spinner-border text-white" role="status">
+				<span class="sr-only"><?php echo JText::_('/* language string */'); ?></span>
+			</div>
+		</div>
 		<?php if ($this->countModules('off-canvas')): ?>
-			<aside id="off-canvas" class="off-canvas fixed-top bg-primary shadow">
+			<aside id="off-canvas" class="off-canvas fixed-top bg-primary shadow h-100 text-white pt-2">
 				<jdoc:include type="modules" name="off-canvas" style="xhtml"/>
-				<button id="off-canvas-close-button" type="button" class="btn position-absolute" aria-label="<?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>">
-					<svg width="1em" height="1em" viewBox="0 0 16 16" class="off-canvas__close-icon bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<button id="off-canvas-close-button" type="button" class="off-canvas__close-button btn position-absolute" aria-label="<?php echo JText::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>">
+					<svg width="2em" height="2em" viewBox="0 0 16 16" class="off-canvas__close-icon text-white bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
 					</svg>
 				</button>
