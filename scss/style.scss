@@ -1,0 +1,48 @@
+$off-canvas-width: 300px;
+$transition-duration-sm: .3s;
+$transition-duration-lg: .5s;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.object-fit-cover {
+    object-fit: cover !important;
+}
+.dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotateX(180deg);
+}
+.breadcrumb {
+    &-item {
+        &--no-separator {
+            padding-left: .2rem !important;
+            &::before {
+                display: none !important;
+            }
+        }
+    }
+}
+.dark-layer {
+    background-color: rgba($black, .5);
+    opacity: 1;
+    transition: opacity $transition-duration-lg;
+    &.invisible {
+        opacity: 0;
+        transition: opacity $transition-duration-lg, visibility 0s $transition-duration-lg;
+    }
+}
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+.off-canvas {
+    width: $off-canvas-width;
+    transform: translate(calc((#{$off-canvas-width} + .5rem) * (-1)));
+    transition: transform $transition-duration-lg;
+    &--open {
+        transform: translate(0);
+        transition: transform $transition-duration-lg;
+    }
+    &__close-button {
+        top: 0;
+        right: 0;
+    }
+}

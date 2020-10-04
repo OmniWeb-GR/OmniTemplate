@@ -69,7 +69,7 @@ if ($params->get('dropdown', 0) && !$params->get('dropdownimage', 1))
 		</ul>
 	</div>
 <?php else : ?>
-	<ul class="language-switcher nav d-inline-flex <?php echo $params->get('inline', 1) ? 'lang-inline' : 'lang-block'; ?>" dir="<?php echo JFactory::getLanguage()->isRtl() ? 'rtl' : 'ltr'; ?>">
+	<ul class="language-switcher nav <?php echo $params->get('inline', 1) ? 'lang-inline' : 'lang-block'; ?>" dir="<?php echo JFactory::getLanguage()->isRtl() ? 'rtl' : 'ltr'; ?>">
 	<?php foreach ($list as $language) : ?>
 		<?php if (!$language->active) : ?>
 			<li class="nav-item">
