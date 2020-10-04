@@ -86,3 +86,13 @@ function closeOffCanvas() {
     jQuery("#dark-layer").addClass('invisible');
     jQuery('body').removeClass('overflow-hidden');
 }
+
+function enableLoader() {
+    jQuery('body').addClass('overflow-hidden');
+    jQuery("#loader").removeClass('invisible');
+}
+
+function disableLoader() {
+    jQuery("#loader").addClass('invisible');
+    jQuery('body').removeClass('overflow-hidden');
+}
