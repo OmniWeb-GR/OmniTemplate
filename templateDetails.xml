@@ -6,7 +6,7 @@
 	<authorEmail>omniwebgr@gmail.com</authorEmail>
 	<authorUrl>https://www.omniweb.gr</authorUrl>
 	<copyright></copyright>
-	<version>2020.04.11</version>
+	<version>2020.10.04</version>
 	<description></description>
 	<files>
 		<filename>index.php</filename>
@@ -14,6 +14,7 @@
 		<folder>css</folder>
 		<folder>html</folder>
 		<folder>js</folder>
+		<folder>scss</folder>
 	</files>
 	<positions>
 		<position>header</position>
