@@ -31,6 +31,15 @@ jQuery('#dark-layer').click(function() {
 	closeOffCanvas();
 });
 
+jQuery('#dark-theme-switch').change(function() {
+    if (jQuery(this).prop('checked')) {
+        enableDarkTheme();
+    }
+    else {
+        disableDarkTheme();
+    }
+});
+
 function setTierAndOrientation() {
     if (jQuery('#visible-xs').css('display') == 'block') {
         deviceTier = 'xs';
@@ -95,4 +104,12 @@ function enableLoader() {
 function disableLoader() {
     jQuery("#loader").addClass('invisible');
     jQuery('body').removeClass('overflow-hidden');
+}
+
+function enableDarkTheme() {
+    jQuery('html').addClass('dark');
+}
+
+function disableDarkTheme() {
+    jQuery('html').removeClass('dark');
 }
