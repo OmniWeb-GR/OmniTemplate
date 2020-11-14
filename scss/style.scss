@@ -52,12 +52,3 @@ $transition-duration-lg: .5s;
         filter: invert(100%);
     }
 }
-
-@media (prefers-color-scheme: dark) {
-    html {
-        filter: invert(100%);
-        & img {
-            filter: invert(100%);
-        }
-    }
-}

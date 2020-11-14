@@ -3,8 +3,10 @@ jQuery.noConflict();
 let deviceTier, deviceOrientation;
 
 jQuery(function() {
-	setTierAndOrientation();
-	stylePagination();
+    setTierAndOrientation();
+    enableDarkThemeOnLoad();
+    stylePagination();
+    listenToDarkThemeChange();
 });
 
 jQuery(window).on('load', function (e) {
@@ -107,9 +109,27 @@ function disableLoader() {
 }
 
 function enableDarkTheme() {
+    $("#dark-theme-switch").prop("checked", true);
     jQuery('html').addClass('dark');
 }
 
 function disableDarkTheme() {
+    $("#dark-theme-switch").prop("checked", false);
     jQuery('html').removeClass('dark');
+}
+
+function enableDarkThemeOnLoad() {
+    if ((window.matchMedia) && (window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        enableDarkTheme();
+    }
+}
+
+function listenToDarkThemeChange() {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        if (event.matches) {
+            enableDarkTheme();
+        } else {
+            disableDarkTheme();
+        }
+    });
 }
