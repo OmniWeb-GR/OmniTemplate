@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.9" type="template">
+<extension type="template" method="upgrade">
 	<name>j3template</name>
 	<creationDate>28/03/2020</creationDate>
 	<author>OmniWeb</author>
@@ -7,7 +7,7 @@
 	<authorUrl>https://www.omniweb.gr</authorUrl>
 	<copyright></copyright>
 	<version>2020.11.16</version>
-	<description></description>
+	<description>Joomla! 3.X generic template</description>
 	<files>
 		<filename>index.php</filename>
 		<filename>templateDetails.xml</filename>
