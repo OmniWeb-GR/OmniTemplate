@@ -21,18 +21,11 @@
 		$uri = Uri::getInstance();
 		$url = $uri->toString() . '?template=j3amptemplate';
 	}
-	//***************************************
-	unset($this->_scripts['/media/jui/js/jquery.js']);
-	unset($this->_scripts['/media/jui/js/jquery.min.js']);
-	unset($this->_scripts['/media/jui/js/jquery-noconflict.js']);
-	unset($this->_scripts['/media/jui/js/jquery-migrate.min.js']);
-	unset($this->_scripts['/media/jui/js/bootstrap.js']);
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $lang[0]; ?>" dir="<?php echo $this->direction; ?>">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <jdoc:include type="head"/>
         <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/style.css?v=<?php echo $cache; ?>"/>
 		<?php if (($amp) && ($view == 'article')): ?>
@@ -48,61 +41,81 @@
         <header class="header">
 			<jdoc:include type="modules" name="header" style="xhtml"/>
 		</header>
-        <jdoc:include type="modules" name="above-main" style="xhtml"/>
-        <main class="container-fluid">
-            <jdoc:include type="modules" name="above-content" style="xhtml"/>
-            <?php if ($this->countModules('left-sidebar')): ?>
+		<jdoc:include type="modules" name="above-content" style="xhtml"/>
+		<?php if ($this->countModules('left-sidebar')): ?>
+			<div class="container-fluid">
 				<div class="row">
 					<aside class="col-auto">
 						<jdoc:include type="modules" name="left-sidebar" style="xhtml"/>
 					</aside>
 					<div class="col">
-						<?php if ($this->countModules('content')): ?>
-							<jdoc:include type="modules" name="content" style="xhtml"/>
-						<?php else: ?>
-							<jdoc:include type="component"/>
-						<?php endif; ?>
+						<jdoc:include type="modules" name="above-main" style="xhtml"/>
+						<main>
+							<?php if ($this->countModules('content')): ?>
+								<jdoc:include type="modules" name="content" style="xhtml"/>
+							<?php else: ?>
+								<jdoc:include type="component"/>
+							<?php endif; ?>
+						</main>
+						<jdoc:include type="modules" name="below-main" style="xhtml"/>
 					</div>
 				</div>
-			<?php elseif ($this->countModules('right-sidebar')): ?>
+			</div>
+		<?php elseif ($this->countModules('right-sidebar')): ?>
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
-						<?php if ($this->countModules('content')): ?>
-							<jdoc:include type="modules" name="content" style="xhtml"/>
-						<?php else: ?>
-							<jdoc:include type="component"/>
-						<?php endif; ?>
+						<jdoc:include type="modules" name="above-main" style="xhtml"/>
+						<main>
+							<?php if ($this->countModules('content')): ?>
+								<jdoc:include type="modules" name="content" style="xhtml"/>
+							<?php else: ?>
+								<jdoc:include type="component"/>
+							<?php endif; ?>
+						</main>
+						<jdoc:include type="modules" name="below-main" style="xhtml"/>
 					</div>
 					<aside class="col-auto">
 						<jdoc:include type="modules" name="right-sidebar" style="xhtml"/>
 					</aside>
 				</div>
-			<?php elseif (($this->countModules('left-sidebar')) && ($this->countModules('right-sidebar'))): ?>
+			</div>
+		<?php elseif (($this->countModules('left-sidebar')) && ($this->countModules('right-sidebar'))): ?>
+			<div class="container-fluid">
 				<div class="row">
 					<aside class="col-auto">
 						<jdoc:include type="modules" name="left-sidebar" style="xhtml"/>
 					</aside>
 					<div class="col">
-						<?php if ($this->countModules('content')): ?>
-							<jdoc:include type="modules" name="content" style="xhtml"/>
-						<?php else: ?>
-							<jdoc:include type="component"/>
-						<?php endif; ?>
+						<jdoc:include type="modules" name="above-main" style="xhtml"/>
+						<main>
+							<?php if ($this->countModules('content')): ?>
+								<jdoc:include type="modules" name="content" style="xhtml"/>
+							<?php else: ?>
+								<jdoc:include type="component"/>
+							<?php endif; ?>
+						</main>
+						<jdoc:include type="modules" name="below-main" style="xhtml"/>
 					</div>
 					<aside class="col-auto">
 						<jdoc:include type="modules" name="right-sidebar" style="xhtml"/>
 					</aside>
 				</div>
-            <?php else: ?>
-                <?php if ($this->countModules('content')): ?>
-					<jdoc:include type="modules" name="content" style="xhtml"/>
-				<?php else: ?>
-					<jdoc:include type="component"/>
-				<?php endif; ?>
-            <?php endif; ?>
-            <jdoc:include type="modules" name="below-content" style="xhtml"/>
-        </main>
-        <jdoc:include type="modules" name="below-main" style="xhtml"/>
+			</div>
+        <?php else: ?>
+			<jdoc:include type="modules" name="above-main" style="xhtml"/>
+			<div class="container-fluid">
+				<main>
+					<?php if ($this->countModules('content')): ?>
+						<jdoc:include type="modules" name="content" style="xhtml"/>
+					<?php else: ?>
+						<jdoc:include type="component"/>
+					<?php endif; ?>
+				</main>
+			</div>
+			<jdoc:include type="modules" name="below-main" style="xhtml"/>
+        <?php endif; ?>
+		<jdoc:include type="modules" name="below-content" style="xhtml"/>
         <footer class="footer">
 			<jdoc:include type="modules" name="footer" style="xhtml"/>
 		</footer>
@@ -122,8 +135,9 @@
 				</button>
 			</aside>
 		<?php endif; ?>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
         <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/script.js?v=<?php echo $cache; ?>"></script>
     </body>
 </html>

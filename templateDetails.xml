@@ -6,7 +6,7 @@
 	<authorEmail>omniwebgr@gmail.com</authorEmail>
 	<authorUrl>https://www.omniweb.gr</authorUrl>
 	<copyright></copyright>
-	<version>2020.11.14</version>
+	<version>2020.11.16</version>
 	<description></description>
 	<files>
 		<filename>index.php</filename>
@@ -18,13 +18,13 @@
 	</files>
 	<positions>
 		<position>header</position>
-        <position>above-main</position>
 		<position>above-content</position>
+        <position>above-main</position>
 		<position>left-sidebar</position>
 		<position>content</position>
 		<position>right-sidebar</position>
-		<position>below-content</position>
         <position>below-main</position>
+		<position>below-content</position>
 		<position>footer</position>
 		<position>off-canvas</position>
 	</positions>
