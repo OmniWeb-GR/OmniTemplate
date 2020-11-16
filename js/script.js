@@ -109,12 +109,12 @@ function disableLoader() {
 }
 
 function enableDarkTheme() {
-    $("#dark-theme-switch").prop("checked", true);
+    jQuery("#dark-theme-switch").prop("checked", true);
     jQuery('html').addClass('dark');
 }
 
 function disableDarkTheme() {
-    $("#dark-theme-switch").prop("checked", false);
+    jQuery("#dark-theme-switch").prop("checked", false);
     jQuery('html').removeClass('dark');
 }
 
