@@ -10,18 +10,19 @@
     $sitename = htmlspecialchars($app->get('sitename'), ENT_QUOTES, 'UTF-8');
     $menu     = $app->getMenu()->getActive();
     $pageclass = $menu !== null ? $menu->getParams()->get('pageclass_sfx', '') : '';
+	$lang = explode('-', $this->language);
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
+<html lang="<?php echo $lang[0]; ?>" dir="<?php echo $this->direction; ?>">
     <head>
-        <jdoc:include type="metas">
+        <jdoc:include type="metas"/>
     </head>
-    <body class="<?php echo $option . ' ' . ' view-' . $view . ($layout ? ' layout-' . $layout : ' no-layout') . ($task ? ' task-' . $task : ' no-task') . ($itemid ? ' itemid-' . $itemid : '') . ($pageclass ? ' ' . $pageclass : '') . $hasClass . ($this->direction == 'rtl' ? ' rtl' : ''); ?>">
+    <body class="<?php echo $option . ' ' . $view . ($layout ? ' layout-' . $layout : ' no-layout') . ($task ? ' task-' . $task : ' no-task') . ($itemid ? ' itemid-' . $itemid : '') . ($pageclass ? ' ' . $pageclass : '') . ($this->direction == 'rtl' ? ' rtl' : ''); ?>">
         <?php if ($this->countModules('header')): ?>
 			<header>
                 <div class="<?php htmlspecialchars($this->params->get('container-class'), ENT_COMPAT, 'UTF-8'); ?>">
                     <div class="row">
-                        <jdoc:include type="modules" name="header" style="none">
+                        <jdoc:include type="modules" name="header" style="none"/>
                     </div>
                 </div>
             </header>
@@ -29,7 +30,7 @@
         <?php if ($this->countModules('below-header')): ?>
 			<div class="<?php htmlspecialchars($this->params->get('container-class'), ENT_COMPAT, 'UTF-8'); ?>">
                 <div class="row">
-                    <jdoc:include type="modules" name="below-header" style="none">
+                    <jdoc:include type="modules" name="below-header" style="none"/>
                 </div>
             </div>
 		<?php endif; ?>
@@ -109,7 +110,7 @@
         <?php if ($this->countModules('above-footer')): ?>
 			<div class="<?php htmlspecialchars($this->params->get('container-class'), ENT_COMPAT, 'UTF-8'); ?>">
                 <div class="row">
-                    <jdoc:include type="modules" name="above-footer" style="none">
+                    <jdoc:include type="modules" name="above-footer" style="none"/>
                 </div>
             </div>
 		<?php endif; ?>
@@ -117,7 +118,7 @@
 			<footer>
                 <div class="<?php htmlspecialchars($this->params->get('container-class'), ENT_COMPAT, 'UTF-8'); ?>">
                     <div class="row">
-                        <jdoc:include type="modules" name="footer" style="none">
+                        <jdoc:include type="modules" name="footer" style="none"/>
                     </div>
                 </div>
             </footer>
