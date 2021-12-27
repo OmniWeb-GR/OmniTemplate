@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="template" client="site">
-	<name>Omnitemplate</name>
+	<name>OmniTemplate</name>
 	<creationDate>27/12/2021</creationDate>
 	<author>OmniWeb</author>
 	<authorEmail>omniwebgr@gmail.com</authorEmail>
 	<authorUrl>https://www.omniweb.gr</authorUrl>
 	<copyright>(C) 2021 OmniWeb</copyright>
-	<version>2021.12.27</version>
+	<version>4.2021.12.27</version>
 	<description>Joomla! generic template</description>
 	<files>
 		<filename>index.php</filename>
