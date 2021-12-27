@@ -1,2 +1,2 @@
-# j3template
- 
+# OmniTemplate
+Joomla! generic template
