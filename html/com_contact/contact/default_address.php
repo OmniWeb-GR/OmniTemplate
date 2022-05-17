@@ -3,145 +3,153 @@
  * @package     Joomla.Site
  * @subpackage  com_contact
  *
- * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
+ * @copyright   (C) 2006 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\String\PunycodeHelper;
+
+$icon = $this->params->get('contact_icons') == 0;
 
 /**
  * Marker_class: Class based on the selection of text, none, or icons
  * jicon-text, jicon-none, jicon-icon
  */
 ?>
-<dl class="contact__address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+<dl class="com-contact__address contact-address dl-horizontal" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
 	<?php if (($this->params->get('address_check') > 0) &&
-		($this->contact->address || $this->contact->suburb  || $this->contact->state || $this->contact->country || $this->contact->postcode)) : ?>
+		($this->item->address || $this->item->suburb  || $this->item->state || $this->item->country || $this->item->postcode)) : ?>
 		<dt>
-			<span class="<?php echo $this->params->get('marker_class'); ?>">
-				<?php echo $this->params->get('marker_address'); ?>
-			</span>
+			<?php if ($icon && !$this->params->get('marker_address')) : ?>
+				<span class="icon-address" aria-hidden="true"></span><span class="visually-hidden"><?php echo Text::_('COM_CONTACT_ADDRESS'); ?></span>
+			<?php else : ?>
+				<span class="<?php echo $this->params->get('marker_class'); ?>">
+					<?php echo $this->params->get('marker_address'); ?>
+				</span>
+			<?php endif; ?>
 		</dt>
 
-		<?php if ($this->contact->address && $this->params->get('show_street_address')) : ?>
+		<?php if ($this->item->address && $this->params->get('show_street_address')) : ?>
 			<dd>
-				<span class="contact__street" itemprop="streetAddress">
-					<?php echo nl2br($this->contact->address); ?>
-					<br />
+				<span class="contact-street" itemprop="streetAddress">
+					<?php echo nl2br($this->item->address, false); ?>
 				</span>
 			</dd>
 		<?php endif; ?>
 
-		<?php if ($this->contact->suburb && $this->params->get('show_suburb')) : ?>
+		<?php if ($this->item->suburb && $this->params->get('show_suburb')) : ?>
 			<dd>
-				<span class="contact__suburb" itemprop="addressLocality">
-					<?php echo $this->contact->suburb; ?>
-					<br />
+				<span class="contact-suburb" itemprop="addressLocality">
+					<?php echo $this->item->suburb; ?>
 				</span>
 			</dd>
 		<?php endif; ?>
-		<?php if ($this->contact->state && $this->params->get('show_state')) : ?>
+		<?php if ($this->item->state && $this->params->get('show_state')) : ?>
 			<dd>
-				<span class="contact__state" itemprop="addressRegion">
-					<?php echo $this->contact->state; ?>
-					<br />
+				<span class="contact-state" itemprop="addressRegion">
+					<?php echo $this->item->state; ?>
 				</span>
 			</dd>
 		<?php endif; ?>
-		<?php if ($this->contact->postcode && $this->params->get('show_postcode')) : ?>
+		<?php if ($this->item->postcode && $this->params->get('show_postcode')) : ?>
 			<dd>
-				<span class="contact__postcode" itemprop="postalCode">
-					<?php echo $this->contact->postcode; ?>
-					<br />
+				<span class="contact-postcode" itemprop="postalCode">
+					<?php echo $this->item->postcode; ?>
 				</span>
 			</dd>
 		<?php endif; ?>
-		<?php if ($this->contact->country && $this->params->get('show_country')) : ?>
-		<dd>
-			<span class="contact__country" itemprop="addressCountry">
-				<?php echo $this->contact->country; ?>
-				<br />
-			</span>
-		</dd>
+		<?php if ($this->item->country && $this->params->get('show_country')) : ?>
+			<dd>
+				<span class="contact-country" itemprop="addressCountry">
+					<?php echo $this->item->country; ?>
+				</span>
+			</dd>
 		<?php endif; ?>
 	<?php endif; ?>
 
-<?php if ($this->contact->email_to && $this->params->get('show_email')) : ?>
+<?php if ($this->item->email_to && $this->params->get('show_email')) : ?>
 	<dt>
-		<span class="<?php echo $this->params->get('marker_class'); ?>" itemprop="email">
-			<?php echo nl2br($this->params->get('marker_email')); ?>
-		</span>
+		<?php if ($icon && !$this->params->get('marker_email')) : ?>
+			<span class="icon-envelope" aria-hidden="true"></span><span class="visually-hidden"><?php echo Text::_('COM_CONTACT_EMAIL'); ?>"></span>
+		<?php else : ?>
+			<span class="<?php echo $this->params->get('marker_class'); ?>">
+				<?php echo $this->params->get('marker_email'); ?>
+			</span>
+		<?php endif; ?>
 	</dt>
 	<dd>
-		<span class="contact__emailto">
-			<?php echo $this->contact->email_to; ?>
+		<span class="contact-emailto">
+			<?php echo $this->item->email_to; ?>
 		</span>
 	</dd>
 <?php endif; ?>
 
-<?php if ($this->contact->telephone && $this->params->get('show_telephone')) : ?>
+<?php if ($this->item->telephone && $this->params->get('show_telephone')) : ?>
 	<dt>
-		<span class="<?php echo $this->params->get('marker_class'); ?>">
-			<?php echo $this->params->get('marker_telephone'); ?>
-		</span>
+		<?php if ($icon && !$this->params->get('marker_telephone')) : ?>
+				<span class="icon-phone" aria-hidden="true"></span><span class="visually-hidden"><?php echo Text::_('COM_CONTACT_TELEPHONE'); ?></span>
+		<?php else : ?>
+			<span class="<?php echo $this->params->get('marker_class'); ?>">
+				<?php echo $this->params->get('marker_telephone'); ?>
+			</span>
+		<?php endif; ?>
 	</dt>
 	<dd>
-		<span class="contact__telephone" itemprop="telephone">
-			<?php echo $this->contact->telephone; ?>
+		<span class="contact-telephone" itemprop="telephone">
+			<?php echo $this->item->telephone; ?>
 		</span>
 	</dd>
 <?php endif; ?>
-<?php if ($this->contact->fax && $this->params->get('show_fax')) : ?>
+<?php if ($this->item->fax && $this->params->get('show_fax')) : ?>
 	<dt>
-		<span class="<?php echo $this->params->get('marker_class'); ?>">
-			<?php echo $this->params->get('marker_fax'); ?>
-		</span>
+		<?php if ($icon && !$this->params->get('marker_fax')) : ?>
+			<span class="icon-fax" aria-hidden="true"></span><span class="visually-hidden"><?php echo Text::_('COM_CONTACT_FAX'); ?></span>
+		<?php else : ?>
+			<span class="<?php echo $this->params->get('marker_class'); ?>">
+				<?php echo $this->params->get('marker_fax'); ?>
+			</span>
+		<?php endif; ?>
 	</dt>
 	<dd>
-		<span class="contact__fax" itemprop="faxNumber">
-		<?php echo $this->contact->fax; ?>
+		<span class="contact-fax" itemprop="faxNumber">
+		<?php echo $this->item->fax; ?>
 		</span>
 	</dd>
 <?php endif; ?>
-<?php if ($this->contact->mobile && $this->params->get('show_mobile')) : ?>
+<?php if ($this->item->mobile && $this->params->get('show_mobile')) : ?>
 	<dt>
-		<span class="<?php echo $this->params->get('marker_class'); ?>">
-			<?php echo $this->params->get('marker_mobile'); ?>
-		</span>
+		<?php if ($icon && !$this->params->get('marker_mobile')) : ?>
+			<span class="icon-mobile" aria-hidden="true"></span><span class="visually-hidden"><?php echo Text::_('COM_CONTACT_MOBILE'); ?></span>
+		<?php else : ?>
+			<span class="<?php echo $this->params->get('marker_class'); ?>">
+				<?php echo $this->params->get('marker_mobile'); ?>
+			</span>
+		<?php endif; ?>
 	</dt>
 	<dd>
-		<span class="contact__mobile" itemprop="telephone">
-			<?php echo $this->contact->mobile; ?>
+		<span class="contact-mobile" itemprop="telephone">
+			<?php echo $this->item->mobile; ?>
 		</span>
 	</dd>
 <?php endif; ?>
-<?php if ($this->contact->webpage && $this->params->get('show_webpage')) : ?>
+<?php if ($this->item->webpage && $this->params->get('show_webpage')) : ?>
 	<dt>
-		<span class="<?php echo $this->params->get('marker_class'); ?>">
-		</span>
+		<?php if ($icon && !$this->params->get('marker_webpage')) : ?>
+			<span class="icon-home" aria-hidden="true"></span><span class="visually-hidden"><?php echo Text::_('COM_CONTACT_WEBPAGE'); ?></span>
+		<?php else : ?>
+			<span class="<?php echo $this->params->get('marker_class'); ?>">
+				<?php echo $this->params->get('marker_webpage'); ?>
+			</span>
+		<?php endif; ?>
 	</dt>
 	<dd>
-		<span class="contact__webpage">
-			<a href="<?php echo $this->contact->webpage; ?>" target="_blank" rel="noopener noreferrer" itemprop="url">
-			<?php echo JStringPunycode::urlToUTF8($this->contact->webpage); ?></a>
+		<span class="contact-webpage">
+			<a href="<?php echo $this->item->webpage; ?>" target="_blank" rel="noopener noreferrer" itemprop="url">
+			<?php echo PunycodeHelper::urlToUTF8($this->item->webpage); ?></a>
 		</span>
 	</dd>
 <?php endif; ?>
 </dl>
-
-
-
-
-
-<!-- <?php if (($this->params->get('address_check') > 0) && ($this->contact->address || $this->contact->suburb  || $this->contact->state || $this->contact->country || $this->contact->postcode)) : ?>
-	<address class="contact__address row d-inline-flex" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-		<div class="col-auto">
-			<?php echo $this->params->get('marker_address'); ?>
-		</div>
-		<div class="col">
-			<?php if ($this->contact->address && $this->params->get('show_street_address')) : ?>
-
-			<?php endif; ?>
-		</div>
-	</address>
-<?php endif; ?> -->

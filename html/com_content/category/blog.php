@@ -3,60 +3,63 @@
  * @package     Joomla.Site
  * @subpackage  com_content
  *
- * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
+ * @copyright   (C) 2006 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\FileLayout;
 
-JHtml::_('behavior.caption');
-
-$dispatcher = JEventDispatcher::getInstance();
+$app = Factory::getApplication();
 
 $this->category->text = $this->category->description;
-$dispatcher->trigger('onContentPrepare', array($this->category->extension . '.categories', &$this->category, &$this->params, 0));
+$app->triggerEvent('onContentPrepare', array($this->category->extension . '.categories', &$this->category, &$this->params, 0));
 $this->category->description = $this->category->text;
 
-$results = $dispatcher->trigger('onContentAfterTitle', array($this->category->extension . '.categories', &$this->category, &$this->params, 0));
+$results = $app->triggerEvent('onContentAfterTitle', array($this->category->extension . '.categories', &$this->category, &$this->params, 0));
 $afterDisplayTitle = trim(implode("\n", $results));
 
-$results = $dispatcher->trigger('onContentBeforeDisplay', array($this->category->extension . '.categories', &$this->category, &$this->params, 0));
+$results = $app->triggerEvent('onContentBeforeDisplay', array($this->category->extension . '.categories', &$this->category, &$this->params, 0));
 $beforeDisplayContent = trim(implode("\n", $results));
 
-$results = $dispatcher->trigger('onContentAfterDisplay', array($this->category->extension . '.categories', &$this->category, &$this->params, 0));
+$results = $app->triggerEvent('onContentAfterDisplay', array($this->category->extension . '.categories', &$this->category, &$this->params, 0));
 $afterDisplayContent = trim(implode("\n", $results));
 
+$htag    = $this->params->get('show_page_heading') ? 'h2' : 'h1';
+
 ?>
+<div class="com-content-category-blog blog mx-auto" itemscope itemtype="https://schema.org/Blog">
 	<?php if ($this->params->get('show_page_heading')) : ?>
 		<div class="page-header">
 			<h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
 		</div>
 	<?php endif; ?>
 
-	<?php if ($this->params->get('show_category_title', 1) or $this->params->get('page_subheading')) : ?>
-		<h2> <?php echo $this->escape($this->params->get('page_subheading')); ?>
-			<?php if ($this->params->get('show_category_title')) : ?>
-				<span class="subheading-category"><?php echo $this->category->title; ?></span>
-			<?php endif; ?>
-		</h2>
+	<?php if ($this->params->get('show_category_title', 1)) : ?>
+	<<?php echo $htag; ?>>
+		<?php echo $this->category->title; ?>
+	</<?php echo $htag; ?>>
 	<?php endif; ?>
 	<?php echo $afterDisplayTitle; ?>
 
 	<?php if ($this->params->get('show_cat_tags', 1) && !empty($this->category->tags->itemTags)) : ?>
-		<?php $this->category->tagLayout = new JLayoutFile('joomla.content.tags'); ?>
+		<?php $this->category->tagLayout = new FileLayout('joomla.content.tags'); ?>
 		<?php echo $this->category->tagLayout->render($this->category->tags->itemTags); ?>
 	<?php endif; ?>
 
 	<?php if ($beforeDisplayContent || $afterDisplayContent || $this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
 		<div class="category-desc clearfix">
 			<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
-				<img src="<?php echo $this->category->getParams()->get('image'); ?>" alt="<?php echo htmlspecialchars($this->category->getParams()->get('image_alt'), ENT_COMPAT, 'UTF-8'); ?>"/>
+				<?php $alt = empty($this->category->getParams()->get('image_alt')) && empty($this->category->getParams()->get('image_alt_empty')) ? '' : 'alt="' . htmlspecialchars($this->category->getParams()->get('image_alt'), ENT_COMPAT, 'UTF-8') . '"'; ?>
+				<img src="<?php echo $this->category->getParams()->get('image'); ?>" <?php echo $alt; ?>>
 			<?php endif; ?>
 			<?php echo $beforeDisplayContent; ?>
 			<?php if ($this->params->get('show_description') && $this->category->description) : ?>
-				<?php echo JHtml::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
+				<?php echo HTMLHelper::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
 			<?php endif; ?>
 			<?php echo $afterDisplayContent; ?>
 		</div>
@@ -64,59 +67,60 @@ $afterDisplayContent = trim(implode("\n", $results));
 
 	<?php if (empty($this->lead_items) && empty($this->link_items) && empty($this->intro_items)) : ?>
 		<?php if ($this->params->get('show_no_articles', 1)) : ?>
-			<p><?php echo JText::_('COM_CONTENT_NO_ARTICLES'); ?></p>
+			<div class="alert alert-info">
+				<span class="icon-info-circle" aria-hidden="true"></span><span class="visually-hidden"><?php echo Text::_('INFO'); ?></span>
+					<?php echo Text::_('COM_CONTENT_NO_ARTICLES'); ?>
+			</div>
 		<?php endif; ?>
 	<?php endif; ?>
 
 	<?php $leadingcount = 0; ?>
 	<?php if (!empty($this->lead_items)) : ?>
-		<div class="items-leading clearfix">
+		<div class="com-content-category-blog__items blog-items items-leading <?php echo $this->params->get('blog_class_leading'); ?>">
 			<?php foreach ($this->lead_items as &$item) : ?>
-				<div class="leading-<?php echo $leadingcount; ?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>"
+				<div class="com-content-category-blog__item blog-item"
 					itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-					<?php
-					$this->item = &$item;
-					echo $this->loadTemplate('item');
-					?>
+						<?php
+						$this->item = & $item;
+						echo $this->loadTemplate('item');
+						?>
 				</div>
 				<?php $leadingcount++; ?>
 			<?php endforeach; ?>
-		</div><!-- end items-leading -->
+		</div>
 	<?php endif; ?>
 
 	<?php
-		$introcount = count($this->intro_items);
-		$columns = explode("0", $this->columns);
-		if (array_key_exists(0, $columns)) {
-			$columns[0] = 'col-' . round(12 / $columns[0]);
-		}
-		if (array_key_exists(1, $columns)) {
-			$columns[1] = ' col-sm-' . round(12 / $columns[1]);
-		}
-		if (array_key_exists(2, $columns)) {
-			$columns[2] = ' col-md-' . round(12 / $columns[2]);
-		}
-		if (array_key_exists(3, $columns)) {
-			$columns[3] = ' col-lg-' . round(12 / $columns[3]);
-		}
-		if (array_key_exists(4, $columns)) {
-			$columns[4] = ' col-xl-' . round(12 / $columns[4]);
-		}
-		$class = '';
-		foreach ($columns as $value) {
-			$class .=  $value;
-		}
+	$introcount = count($this->intro_items);
+	$counter = 0;
 	?>
+
 	<?php if (!empty($this->intro_items)) : ?>
-		<div class="row blog<?php echo $this->pageclass_sfx; ?>" itemscope itemtype="https://schema.org/Blog">
-			<?php foreach ($this->intro_items as $key => &$item) : ?>
-				<div class="mb-1 <?php echo $class; ?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-					<?php
-						$this->item = &$item;
+		<?php
+			if ($this->params->get('num_columns') != '1') {
+				$columnspertier = explode('0', $this->params->get('num_columns'), 6);
+				$tiers = array('-', '-sm-', '-md-', '-lg-', '-xl-', '-xxl-');
+				foreach ($columnspertier as $key=>$columns) {
+					$colclass .= 'col' . $tiers[$key] . round(12 / $columns) . ' ';
+				}
+			}
+			else {
+				$colclass .= 'col-12';
+			}
+		?>
+		<?php $blogClass = $this->params->get('blog_class', ''); ?>
+		<div class="row g-3">
+		<?php foreach ($this->intro_items as $key => &$item) : ?>
+			<div class="<?php echo $colclass ?>">
+				<div class="com-content-category-blog__item blog-item <?php echo $blogClass; ?>"
+					itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+						<?php
+						$this->item = & $item;
 						echo $this->loadTemplate('item');
-					?>
+						?>
 				</div>
-			<?php endforeach; ?>
+			</div>
+		<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
 
@@ -127,16 +131,22 @@ $afterDisplayContent = trim(implode("\n", $results));
 	<?php endif; ?>
 
 	<?php if ($this->maxLevel != 0 && !empty($this->children[$this->category->id])) : ?>
-		<div class="cat-children">
+		<div class="com-content-category-blog__children cat-children">
 			<?php if ($this->params->get('show_category_heading_title_text', 1) == 1) : ?>
-				<h3> <?php echo JText::_('JGLOBAL_SUBCATEGORIES'); ?> </h3>
+				<h3> <?php echo Text::_('JGLOBAL_SUBCATEGORIES'); ?> </h3>
 			<?php endif; ?>
 			<?php echo $this->loadTemplate('children'); ?> </div>
 	<?php endif; ?>
-	<?php if (($this->params->def('show_pagination', 1) == 1 || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) : ?>
-		<div class="pagination">
+	<?php if (($this->params->def('show_pagination', 1) == 1 || ($this->params->get('show_pagination') == 2)) && ($this->pagination->pagesTotal > 1)) : ?>
+		<div class="com-content-category-blog__navigation w-100">
 			<?php if ($this->params->def('show_pagination_results', 1)) : ?>
-				<p class="counter pull-right"> <?php echo $this->pagination->getPagesCounter(); ?> </p>
+				<p class="com-content-category-blog__counter counter float-end pt-3 pe-2">
+					<?php echo $this->pagination->getPagesCounter(); ?>
+				</p>
 			<?php endif; ?>
-			<?php echo $this->pagination->getPagesLinks(); ?> </div>
+			<div class="com-content-category-blog__pagination">
+				<?php echo $this->pagination->getPagesLinks(); ?>
+			</div>
+		</div>
 	<?php endif; ?>
+</div>
