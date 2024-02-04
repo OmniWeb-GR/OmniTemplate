@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/andreaskournoutas/OmniTemplate#readme",
   "dependencies": {
+    "@material/web": "^1.2.0",
     "@popperjs/core": "^2.11.5",
-    "bootstrap": "^5.2.0-beta1",
+    "animate.css": "^4.1.1",
+    "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.8.2"
   }
 }
