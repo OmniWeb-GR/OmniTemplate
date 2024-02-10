@@ -4,19 +4,15 @@
  * @package     Joomla.Site
  * @subpackage  Layout
  *
- * @copyright   (C) 2016 Open Source Matters, Inc. <https://www.joomla.org>
+ * @copyright   (C) 2023 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\Utility\Utility;
-
-extract($displayData);
-
 /**
+ * The layout allows to add extra control buttons to the field, example "propagate association" by com_content.
+ *
  * Layout variables
  * -----------------
  * @var   string   $autocomplete    Autocomplete attribute for the field.
@@ -42,28 +38,11 @@ extract($displayData);
  * @var   boolean  $spellcheck      Spellcheck state for the form field.
  * @var   string   $validate        Validation rules to apply.
  * @var   string   $value           Value attribute of the field.
- * @var   array    $checkedOptions  Options that will be set as checked.
- * @var   boolean  $hasValue        Has this field a value assigned?
- * @var   array    $options         Options available for this field.
- * @var   array    $inputType       Options available for this field.
- * @var   string   $accept          File types that are accepted.
  * @var   string   $dataAttribute   Miscellaneous data attributes preprocessed for HTML output
  * @var   array    $dataAttributes  Miscellaneous data attribute for eg, data-*
+ * @var   string   $valueTitle
+ * @var   array    $canDo
+ * @var   string[] $urls
+ * @var   string[] $modalTitles
+ * @var   string[] $buttonIcons
  */
-
-$maxSize = HTMLHelper::_('number.bytes', Utility::getMaxUploadSize());
-
-?>
-<input type="file"
-    name="<?php echo $name; ?>"
-    id="<?php echo $id; ?>"
-    <?php echo !empty($size) ? ' size="' . $size . '"' : ''; ?>
-    <?php echo !empty($accept) ? ' accept="' . $accept . '"' : ''; ?>
-    <?php echo !empty($class) ? ' class="form-control ' . $class . '"' : ' class="form-control"'; ?>
-    <?php echo !empty($multiple) ? ' multiple' : ''; ?>
-    <?php echo $disabled ? ' disabled' : ''; ?>
-    <?php echo $autofocus ? ' autofocus' : ''; ?>
-    <?php echo $dataAttribute; ?>
-    <?php echo !empty($onchange) ? ' onchange="' . $onchange . '"' : ''; ?>
-    <?php echo $required ? ' required' : ''; ?>><br>
-    <?php echo Text::sprintf('JGLOBAL_MAXIMUM_UPLOAD_SIZE_LIMIT', $maxSize); ?>
