@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="template" client="site">
+<extension type="template" client="site" method="upgrade">
 	<name>OmniTemplate</name>
 	<creationDate>27/12/2021</creationDate>
 	<author>OmniWeb</author>
 	<authorEmail>info@omniweb.gr</authorEmail>
 	<authorUrl>https://www.omniweb.gr</authorUrl>
 	<copyright>(C) 2024 OmniWeb</copyright>
-	<version>2024.01.25</version>
-	<description>Original unmodified template</description>
+	<version>2024.02.15-beta</version>
+	<description>Joomla! 5 Master template by OmniWeb</description>
+	<inheritable>1</inheritable>
 	<files>
 		<filename>index.php</filename>
 		<filename>templateDetails.xml</filename>
@@ -69,7 +70,7 @@
 					name="version"
 					type="text"
 					default="0"
-					label="Version number query string"
+					label="Version number"
 					filter="integer"
 				/>
 			</fieldset>
