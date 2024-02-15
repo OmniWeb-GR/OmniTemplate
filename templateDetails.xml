@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="template" client="site" method="upgrade">
-	<name>OmniTemplate</name>
+	<name>omnitemplate</name>
 	<creationDate>27/12/2021</creationDate>
 	<author>OmniWeb</author>
 	<authorEmail>info@omniweb.gr</authorEmail>
@@ -13,7 +13,7 @@
 		<filename>index.php</filename>
 		<filename>templateDetails.xml</filename>
 		<folder>css</folder>
-		<!--<folder>html</folder>-->
+		<folder>html</folder
 		<folder>js</folder>
 		<!--<folder>scss</folder>-->
 	</files>
